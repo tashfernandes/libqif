@@ -26,8 +26,8 @@ jobs:
       env:
         CIBW_BEFORE_BUILD: |
           pip install --upgrade pip
-          pip install "pybind11>=2.11"
-          pip install --upgrade scikit-build cmake ninja
+          #pip install "pybind11>=2.11"
+          pip install --upgrade scikit-build cmake pybind11 ninja
         CIBW_BUILD: "cp312-manylinux_x86_64"
         CIBW_BUILD_VERBOSITY: 1
         CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
