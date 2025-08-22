@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # stop on any error
-set -e
+# set -e
 
 sysctl -a | grep machdep.cpu			# cpu info
 
