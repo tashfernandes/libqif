@@ -8,7 +8,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
 
     steps:
     - uses: actions/checkout@v4
@@ -24,16 +24,16 @@ jobs:
 
     - name: Build wheels
       env:
-        CIBW_BUILD: "cp38-* cp39-* cp310-* cp311-* cp312-*"
+        CIBW_BUILD: "cp3{8,9,10,11,12}-manylinux_x86_64"
         CIBW_BUILD_VERBOSITY: 1
         CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
         CIBW_BEFORE_ALL_LINUX: bash .github/workflows/prepare-build-linux.sh
-        CIBW_BEFORE_ALL_MACOS: bash .github/workflows/prepare-build-macos.sh
-        CIBW_BEFORE_ALL_WINDOWS: bash .github/workflows/prepare-build-windows.sh
+        #CIBW_BEFORE_ALL_MACOS: bash .github/workflows/prepare-build-macos.sh
+        #CIBW_BEFORE_ALL_WINDOWS: bash .github/workflows/prepare-build-windows.sh
 
         CIBW_REPAIR_WHEEL_COMMAND_LINUX: auditwheel repair -L /.libs -w {dest_dir} {wheel}  # -L /.libs puts the libs under "qif/.libs"
-        CIBW_REPAIR_WHEEL_COMMAND_MACOS: delocate-wheel -v -w {dest_dir} {wheel}            # --require-archs x86_64 (this throws error for some reason)
-        CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: pip install pefile machomachomangler && python .github/workflows/repair-wheel-windows.py {wheel} -w {dest_dir}
+        #CIBW_REPAIR_WHEEL_COMMAND_MACOS: delocate-wheel -v -w {dest_dir} {wheel}            # --require-archs x86_64 (this throws error for some reason)
+        #CIBW_REPAIR_WHEEL_COMMAND_WINDOWS: pip install pefile machomachomangler && python .github/workflows/repair-wheel-windows.py {wheel} -w {dest_dir}
 
         # Workaround: cibuildwheel runs "pip wheel", which copies the lib_python dir to a temporary directory. This is
         # problematic because the code in lib_python expects to have the project root as parent dir. To workaround this
