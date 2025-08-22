@@ -18,5 +18,5 @@ mv misc/docs/_build/html /output													# save in case we need to publish i
 touch /output/html/.nojekyll														# disable jekyll processing, cause it hides folders starting with underscore!
 
 rm -rf *
-cmake -DPYTHON_EXECUTABLE=/opt/python/cp38-cp38/bin/python ..						# then compile again with the default march
+cmake -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..						# then compile again with the default march
 make install -j 2
