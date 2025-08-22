@@ -51,39 +51,7 @@ jobs:
         python -m cibuildwheel --output-dir wheelhouse lib_python
         mkdir wheelhouse/dist && mv wheelhouse/*.whl wheelhouse/dist/
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: ./wheelhouse/
 
-
-  # Upload wheels to PyPI and publish docs ##########################################################
-  upload_pypi:
-    needs: [build_wheels]
-    runs-on: ubuntu-latest
-    if: startsWith(github.event.ref, 'refs/tags/v')
-    steps:
-      - uses: actions/download-artifact@v2
-        with:
-          name: artifact
-
-      - uses: pypa/gh-action-pypi-publish@master
-        if: ${{ !contains(github.event.ref, '-test') }}
-        with:
-          user: __token__
-          password: ${{ secrets.pypi_password }}
-
-      - uses: pypa/gh-action-pypi-publish@master
-        if: contains(github.event.ref, '-test')
-        with:
-          user: __token__
-          password: ${{ secrets.test_pypi_password }}
-          repository_url: https://test.pypi.org/legacy/
-
-      - name: Publish docs to gh-pages
-        if: ${{ !contains(github.event.ref, '-test') }}
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          force_orphan: true
-          publish_branch: gh-pages
-          publish_dir: ./html
