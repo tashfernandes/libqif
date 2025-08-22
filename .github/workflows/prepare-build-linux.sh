@@ -9,7 +9,7 @@ cat /proc/cpuinfo
 # DPYTHON_EXECUTABLE is needed only for docs, it needs to match the version used to install Sphinx in the libqif-manylinux container (see setup.sh)
 mkdir build
 cd build
-cmake -DMARCH=x86-64 -DPYTHON_EXECUTABLE=/opt/python/cp38-cp38/bin/python ..		# the gh-actions vm crashes with march=native,sandybridge or haswell, so use x86-64 just for the tests
+cmake -DMARCH=x86-64 -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..		# the gh-actions vm crashes with march=native,sandybridge or haswell, so use x86-64 just for the tests
 make qif_cpp tests_cpp samples docs -j 2
 ./tests_cpp/run
 
