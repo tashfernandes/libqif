@@ -5,7 +5,7 @@
 #define VAR_NAME_VALUE(var) #var "="  VALUE(var)
 //#pragma message(VAR_NAME_VALUE(ARMA_USE_CXX11))
 
-#define ARMA_SET_CERR(stream) arma::set_cerr_stream(stream)
+//#define ARMA_SET_CERR(stream) arma::set_cerr_stream(stream)
 
 template<typename eT> inline const eT     def_md			= eT(0);
 template<>            inline const double def_md<double>	= 1e-7;

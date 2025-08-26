@@ -11,10 +11,10 @@ struct arma_real_only<rat> {
 
 // use direct_dot_arma (generic dot product implementation) for direct_dot<rat>
 //
-template<>
-arma_hot inline rat op_dot::direct_dot<rat>(const uword n_elem, const rat* const A, const rat* const B) {
-	return op_dot::direct_dot_arma<rat>(n_elem, A, B);
-}
+//template<>
+//arma_hot inline rat op_dot::direct_dot<rat>(const uword n_elem, const rat* const A, const rat* const B) {
+//	return op_dot::direct_dot_arma<rat>(n_elem, A, B);
+//}
 
 // for abs
 //
@@ -39,7 +39,7 @@ inline
 arma_malloc
 rat*
 memory::acquire<rat>(const uword n_elem) {
-	arma_debug_check(
+	arma_conform_check(
 		( size_t(n_elem) > (std::numeric_limits<size_t>::max() / sizeof(rat)) ),
 		"arma::memory::acquire(): requested size is too large"
 	);
