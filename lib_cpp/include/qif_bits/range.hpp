@@ -25,7 +25,14 @@ limitations under the License.
 namespace detail {
 
 template <typename T>
-struct range_iter_base : std::iterator<std::input_iterator_tag, T> {
+struct range_iter_base {
+    using iterator_category = std::input_iterator_tag;
+    using value_type        = unsigned long;
+    using difference_type   = std::ptrdiff_t;
+    using pointer           = unsigned long*;
+    using reference         = unsigned long&;
+    //: std::iterator<std::input_iterator_tag, T> {
+
     range_iter_base(T current) : current(current) { }
 
     T operator *() const { return current; }
