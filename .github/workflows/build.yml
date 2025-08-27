@@ -21,12 +21,7 @@ jobs:
       name: Install Python
       with:
         python-version: '3.12'
-
-    - name: Install Python 3.12 dev headers
-      run: |
-        sudo apt-get update && sudo apt-get install -qy python3.12-dev python3-pip python3-sphinx
-        python3 -m pip install --upgrade pip
-
+        
     - name: Install other things
       run: sudo apt-get install -qy libgmp-dev libglpk-dev libgsl0-dev lsb-release
       
@@ -34,8 +29,7 @@ jobs:
       env:
         CIBW_BEFORE_BUILD: |
           pip install --upgrade pip
-          #pip install "pybind11>=2.11"
-          pip install --upgrade scikit-build cmake pybind11 ninja
+          pip install --upgrade scikit-build cmake pybind11 ninja python3-sphinx
         CIBW_BUILD: "cp312-manylinux_x86_64"
         CIBW_BUILD_VERBOSITY: 1
         CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
