@@ -3,6 +3,9 @@
 set -x		# echo commands
 set -e		# stop on any error
 
+which python3
+which python
+
 cat /proc/cpuinfo
 
 # build qif
