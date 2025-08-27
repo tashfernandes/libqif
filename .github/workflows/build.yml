@@ -24,7 +24,7 @@ jobs:
 
     - name: Install Python 3.12 dev headers
       run: |
-        sudo apt-get update && sudo apt-get install -qy python3.12-dev python3-distutils python3-pip python3-sphinx
+        sudo apt-get update && sudo apt-get install -qy python3.12-dev python3-pip python3-sphinx
         python3 -m pip install --upgrade pip
 
     - name: Install other things
