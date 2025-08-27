@@ -4,11 +4,11 @@ namespace qif::qp {
 
 
 Method    Defaults::method       = Method::ADDM;
-bool        Defaults::osqp_polish  = true;
-bool        Defaults::osqp_verbose = false;
-double      Defaults::osqp_alpha   = -1.0;		// negative means
-double      Defaults::osqp_eps_abs = -1.0;		// keep OSQP's
-double      Defaults::osqp_eps_rel = -1.0;		// defaults
+OSQPInt Defaults::osqp_polish  = true;
+OSQPInt Defaults::osqp_verbose = false;
+OSQPFloat Defaults::osqp_alpha   = -1.0;		// negative means
+OSQPFloat Defaults::osqp_eps_abs = -1.0;		// keep OSQP's
+OSQPFloat Defaults::osqp_eps_rel = -1.0;		// defaults
 
 
 std::ostream& operator<<(std::ostream& os, const Status& status) {

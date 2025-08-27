@@ -15,11 +15,11 @@ std::ostream& operator<<(std::ostream& os, const Method& method);
 
 class Defaults {
 	public:
-		static bool		osqp_polish;
-		static bool		osqp_verbose;
-		static double	osqp_alpha;
-		static double	osqp_eps_abs;
-		static double	osqp_eps_rel;
+		static OSQPInt osqp_polish;
+		static OSQPInt osqp_verbose;
+		static OSQPFloat osqp_alpha;
+		static OSQPFloat osqp_eps_abs;
+		static OSQPFloat osqp_eps_rel;
 		static Method	method;
 };
 
@@ -38,11 +38,11 @@ class QuadraticProgram {
 		Method method = Defaults::method;
 		Status status;
 
-		bool osqp_polish = Defaults::osqp_polish;
-		bool osqp_verbose = Defaults::osqp_verbose;
-		double osqp_alpha = Defaults::osqp_alpha;
-		double osqp_eps_abs = Defaults::osqp_eps_abs;
-		double osqp_eps_rel = Defaults::osqp_eps_rel;
+		OSQPInt osqp_polish = Defaults::osqp_polish;
+		OSQPInt osqp_verbose = Defaults::osqp_verbose;
+		OSQPFloat osqp_alpha = Defaults::osqp_alpha;
+		OSQPFloat osqp_eps_abs = Defaults::osqp_eps_abs;
+		OSQPFloat osqp_eps_rel = Defaults::osqp_eps_rel;
 
 		QuadraticProgram() {}
 
@@ -73,10 +73,10 @@ class QuadraticProgram {
 		uint n_var = 0,							// number of variables
 			 n_con = 0;							// number of constraints
 
-		std::vector<c_float> obj_coeff_lin;		// coefficients for the objective function, linear part
+		std::vector<OSQPFloat> obj_coeff_lin;		// coefficients for the objective function, linear part
 		Sparse<eT> obj_coeff_quad;				// coefficients for the objective function, quadratic part
 		Sparse<eT> con_coeff;					// coefficients for the constraints
-		std::vector<c_float> con_lb, con_ub;	// constraints lower/upper
+		std::vector<OSQPFloat> con_lb, con_ub;	// constraints lower/upper
 
 		bool osqp();
 };
@@ -191,7 +191,7 @@ void QuadraticProgram<eT>::from_matrix(const arma::SpMat<eT>&P, const Col<eT>& c
 		set_obj_coeff(c.row(), c.col(), *c);
 	}
 
-	using cfv = std::vector<c_float>;
+	using cfv = std::vector<OSQPFloat>;
 	obj_coeff_lin = arma::conv_to<cfv>::from(c);
 	
 	end = A.end();
@@ -209,7 +209,7 @@ bool QuadraticProgram<eT>::solve() {
 }
 
 template<typename eT>
-csc* to_csc(uint n_rows, uint n_cols, const Sparse<eT>& entries) {
+OSQPCscMatrix* to_csc(uint n_rows, uint n_cols, const Sparse<eT>& entries) {
 	// Compressed Sparse Column (CSC) format.
 	// https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_column_(CSC_or_CCS)
 	// val:      array of non-zero values, in top-to-bottom, left-to-right order
@@ -219,9 +219,9 @@ csc* to_csc(uint n_rows, uint n_cols, const Sparse<eT>& entries) {
 
 	uint n_nonzero = entries.size();
 
-	c_float* val = (c_float*) malloc(sizeof(c_float) * n_nonzero);
-	c_int* row_ind = (c_int*) malloc(sizeof(c_int) * n_nonzero);
-	c_int* col_ptr = (c_int*) malloc(sizeof(c_int) * n_cols + 1);
+	OSQPFloat* val = (OSQPFloat*) malloc(sizeof(OSQPFloat) * n_nonzero);
+	OSQPInt* row_ind = (OSQPInt*) malloc(sizeof(OSQPInt) * n_nonzero);
+	OSQPInt* col_ptr = (OSQPInt*) malloc(sizeof(OSQPInt) * n_cols + 1);
 
 	uint cur_col = 0;
 	uint cnt = 0;		// next to update
@@ -239,15 +239,9 @@ csc* to_csc(uint n_rows, uint n_cols, const Sparse<eT>& entries) {
 	for(; cur_col <= n_cols; cur_col++)
 		col_ptr[cur_col] = n_nonzero;
 
-	return wrapper::csc_matrix(n_rows, n_cols, n_nonzero, val, row_ind, col_ptr);
+	return wrapper::OSQPCscMatrix_new(n_rows, n_cols, n_nonzero, val, row_ind, col_ptr);
 }
 
-inline void free_csc(csc* matrix) {
-	c_free(matrix->p);
-	c_free(matrix->i);
-	c_free(matrix->x);
-	c_free(matrix);
-}
 
 template<typename eT>
 bool QuadraticProgram<eT>::osqp() {
@@ -257,31 +251,42 @@ bool QuadraticProgram<eT>::osqp() {
 		throw std::runtime_error("not_implemented");
 
 	// populate data
-	OSQPData* data = (OSQPData *)malloc(sizeof(OSQPData));
-	data->n = n_var;								// number of variables
-	data->m = n_con;								// number of constraints
-	data->q = obj_coeff_lin.data();					// cost function, linear part
-	data->P = to_csc(n_var, n_var, obj_coeff_quad);	// cost function, quadratic part
-	data->A = to_csc(n_con, n_var, con_coeff);		// constraints
-	data->l = con_lb.data();						// lower bounds
-	data->u = con_ub.data();						// upper bounds
+	//OSQPData* data = (OSQPData *)malloc(sizeof(OSQPData));
+	//data->n = n_var;								// number of variables
+	//data->m = n_con;								// number of constraints
+	//data->q = obj_coeff_lin.data();					// cost function, linear part
+	//data->P = to_csc(n_var, n_var, obj_coeff_quad);	// cost function, quadratic part
+	//data->A = to_csc(n_con, n_var, con_coeff);		// constraints
+	//data->l = con_lb.data();						// lower bounds
+	//data->u = con_ub.data();						// upper bounds
 
 	// settings
-	OSQPSettings* settings = (OSQPSettings *)malloc(sizeof(OSQPSettings));
+	OSQPSettings* settings = OSQPSettings_new();
 	wrapper::osqp_set_default_settings(settings);
-	settings->polish = osqp_polish;
+	settings->polishing = osqp_polish;
 	settings->verbose = osqp_verbose;
 	if(osqp_alpha   >= 0.0) settings->alpha = osqp_alpha;
 	if(osqp_eps_abs >= 0.0) settings->eps_abs = osqp_eps_abs;
 	if(osqp_eps_rel >= 0.0) settings->eps_rel = osqp_eps_rel;
 
 	// solve
-	OSQPWorkspace* work;
-	wrapper::osqp_setup(&work, data, settings);
-	wrapper::osqp_solve(work);
+	OSQPSolver* solver;
+  OSQPCscMatrix* P = to_csc(n_var, n_var, obj_coeff_quad);
+  OSQPCscMatrix* A = to_csc(n_con, n_var, con_coeff);
+
+	wrapper::osqp_setup(&solver, 
+      P, // cost function, quadratic part
+      obj_coeff_lin.data(), // cost function, linear part
+      A, // constraints
+      con_lb.data(), // lower bounds
+      con_ub.data(), // upper bounds
+      n_con, // number of constraints
+      n_var, // number of variables
+      settings);
+	wrapper::osqp_solve(solver);
 	// std::cout << "DONE\n";
 
-	c_int st = work->info->status_val;
+	OSQPInt st = solver->info->status_val;
 	status =
 		st == OSQP_SOLVED											? Status::OPTIMAL :
 		st == OSQP_PRIMAL_INFEASIBLE || st == OSQP_DUAL_INFEASIBLE	? Status::INFEASIBLE :
@@ -291,17 +296,16 @@ bool QuadraticProgram<eT>::osqp() {
 	if(status == Status::OPTIMAL) {
 		sol.set_size(n_var);
 		for(uint j = 0; j < n_var; j++)
-			sol.at(j) = work->solution->x[j];
+			sol.at(j) = solver->solution->x[j];
 
-		obj = work->info->obj_val;
+		obj = solver->info->obj_val;
 	}
 
 	// cleanup
-	free_csc(data->P);
-	free_csc(data->A);
-	free(data);
-	free(settings);
-	wrapper::osqp_cleanup(work);
+  OSQPCscMatrix_free(P);
+  OSQPCscMatrix_free(A);
+	OSQPSettings_free(settings);
+	wrapper::osqp_cleanup(solver);
 
 	return status == Status::OPTIMAL;
 }

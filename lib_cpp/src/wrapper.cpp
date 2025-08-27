@@ -39,7 +39,7 @@ OSQPInt osqp_setup(OSQPSolver**         solverp,
                             const OSQPFloat*     u,
                             OSQPInt              m,
                             OSQPInt              n,
-                            const OSQPSettings*  settings) { return ::osqp_setup(solverp, p, q, A, l, u, m, n, settings); }
+                            const OSQPSettings*  settings) { return ::osqp_setup(solverp, P, q, A, l, u, m, n, settings); }
 OSQPInt osqp_solve(OSQPSolver* solver) { return ::osqp_solve(solver); }
 OSQPInt osqp_cleanup(OSQPSolver* solver) { return ::osqp_cleanup(solver); }
 OSQPCscMatrix* OSQPCscMatrix_new(OSQPInt    m,
@@ -47,5 +47,8 @@ OSQPCscMatrix* OSQPCscMatrix_new(OSQPInt    m,
                                           OSQPInt    nzmax,
                                           OSQPFloat* x,
                                           OSQPInt*   i,
-                                          OSQPInt*   p) { return OSQPCscMatrix_new(m, n, nzmax, x, i, p); }
+                                          OSQPInt*   p) { return ::OSQPCscMatrix_new(m, n, nzmax, x, i, p); }
+void OSQPCscMatrix_free(OSQPCscMatrix *mat) { return ::OSQPCscMatrix_free(mat); }
+OSQPSettings* OSQPSettings_new() { return ::OSQPSettings_new(); }
+void OSQPSettings_free(OSQPSettings* settings) { return ::OSQPSettings_free(settings); }
 } // namespace qif::wrapper

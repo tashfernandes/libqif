@@ -51,4 +51,7 @@ OSQPCscMatrix *OSQPCscMatrix_new(OSQPInt    m,
                                           OSQPFloat* x,
                                           OSQPInt*   i,
                                           OSQPInt*   p);
+void OSQPCscMatrix_free(OSQPCscMatrix* mat);
+OSQPSettings* OSQPSettings_new(); 
+void OSQPSettings_free(OSQPSettings* settings);
 }

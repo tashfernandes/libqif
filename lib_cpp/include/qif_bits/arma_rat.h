@@ -83,12 +83,12 @@ diskio::convert_token(rat& val, const std::string& token) {
 
 // This is called from constructors taking fill:: arguments (even if fill::randn is never used).
 // And _only_ when ARMA_USE_EXTERN_CXX11_RNG == false (which is the case in MSVC)
-template<>
-inline
-void
-arma_rng_cxx98::randn_dual_val(rat&, rat&) {
-	throw "not implemented";
-}
+//template<>
+//inline
+//void
+//arma_rng_cxx98::randn_dual_val(rat&, rat&) {
+//	throw "not implemented";
+//}
 
 // Datum<eT> declares various constexpr constants, but a constexpr cannot have type rat.
 // So we specialize the class and declare the same constants as inline const.
