@@ -18,5 +18,5 @@ cd build
 #touch /output/html/.nojekyll														# disable jekyll processing, cause it hides folders starting with underscore!
 
 #rm -rf *
-cmake -DPython_EXECUTABLE=$(which python3) ..						# then compile again with the default march
+cmake -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..						# then compile again with the default march
 make install -j 2
