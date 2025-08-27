@@ -25,8 +25,8 @@ jobs:
     - name: Install Python 3.12 dev headers
       run: sudo apt-get update && sudo apt-get install -qy python3-full python3-pip python3-sphinx
 
-    -name: Install other things
-      run: sudo apt-get -qy install g++ build-essential cmake libgmp-dev libglpk-dev libgsl0-dev lsb-release
+    - name: Install other things
+      run: sudo apt-get install -qy g++ build-essential cmake libgmp-dev libglpk-dev libgsl0-dev lsb-release
       
     - name: Build wheels
       env:
