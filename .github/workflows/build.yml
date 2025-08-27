@@ -23,7 +23,9 @@ jobs:
         python-version: '3.12'
 
     - name: Install Python 3.12 dev headers
-      run: sudo apt-get update && sudo apt-get install -qy python3.12-dev python3.12-distutils python3-pip python3-sphinx
+      run: |
+        sudo apt-get update && sudo apt-get install -qy python3.12-dev python3-distutils python3-pip python3-sphinx
+        python3 -m pip install --upgrade pip
 
     - name: Install other things
       run: sudo apt-get install -qy libgmp-dev libglpk-dev libgsl0-dev lsb-release
