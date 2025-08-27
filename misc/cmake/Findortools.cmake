@@ -71,7 +71,7 @@ elseif(UNIX)
         )
 
         foreach(X ${LIB_TO_FIND})
-            find_library(LIB_${X} NAME ${X} PATH_SUFFIXES lib/)
+            find_library(LIB_${X} NAMES ${X} PATH_SUFFIXES lib/)
 	        if(${LIB_${X}} STREQUAL "LIB_${X}-NOTFOUND")
                 message(STATUS "${X} lib NOT FOUND")
             else()

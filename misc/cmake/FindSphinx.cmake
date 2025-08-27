@@ -19,7 +19,13 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
-get_filename_component(PYTHON_PATH ${PYTHON_EXECUTABLE} DIRECTORY)
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
+
+# Show what was found
+message(STATUS "Python interpreter: ${Python_EXECUTABLE}")
+message(STATUS "Python version: ${Python_VERSION}")
+
+get_filename_component(PYTHON_PATH ${Python_EXECUTABLE} DIRECTORY)
 
 find_program(SPHINX_EXECUTABLE NAMES sphinx-build
   HINTS
