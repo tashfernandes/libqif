@@ -21,6 +21,9 @@ jobs:
       name: Install Python
       with:
         python-version: '3.12'
+
+    - name: Verify Python version
+      run: python --version
         
     - name: Install other things
       run: sudo apt-get install -qy libgmp-dev libglpk-dev libgsl0-dev lsb-release
