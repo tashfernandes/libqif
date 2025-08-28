@@ -32,7 +32,7 @@ jobs:
       env:
         CIBW_BEFORE_BUILD: |
           python3 -m pip install --upgrade pip
-          python3 -m pip install --upgrade scikit-build cmake pybind11 ninja python3-sphinx
+          python3 -m pip install --upgrade scikit-build cmake pybind11 ninja
           bash .github/workflows/prepare-build-linux.sh
         CIBW_BUILD: "cp312-manylinux_x86_64"
         CIBW_BUILD_VERBOSITY: 1
