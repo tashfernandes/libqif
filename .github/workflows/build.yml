@@ -31,6 +31,8 @@ jobs:
     - name: Build wheels
       env:
         CIBW_BEFORE_BUILD: |
+          # Ensure Python dev headers are available in the container
+          yum install -y python3-devel
           pip install --upgrade pip
           pip install --upgrade scikit-build cmake pybind11 ninja python3-sphinx
         CIBW_BUILD: "cp312-manylinux_x86_64"
@@ -48,7 +50,8 @@ jobs:
         # problematic because the code in lib_python expects to have the project root as parent dir. To workaround this
         # we pass the project root as TMPDIR, which causes "pip wheel" to create its temp dir inside the project root,
         # so its parent will be the project root as expected!
-        CIBW_ENVIRONMENT: "TMPDIR=$PWD Python3_EXECUTABLE=$(which python) Python3_FIND_STRATEGY=LOCATION"
+        # CIBW_ENVIRONMENT: "TMPDIR=$PWD Python3_EXECUTABLE=$(which python) Python3_FIND_STRATEGY=LOCATION"
+        CIBW_ENVIRONMENT: "TMPDIR=$PWD Python3_EXECUTABLE=$PYTHON Python3_FIND_STRATEGY=LOCATION"
 
         # Windows CMAKE configuration
         # CMAKE_TOOLCHAIN_FILE  find the libraries installed via vcpkg
