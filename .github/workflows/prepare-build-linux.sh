@@ -5,8 +5,6 @@ set -e		# stop on any error
 
 PYTHON=$(which python3)
 echo $PYTHON
-which cmake
-cmake --version
 
 cat /proc/cpuinfo
 
@@ -24,5 +22,5 @@ cd build
 
 #rm -rf *
 #cmake -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..						# then compile again with the default march
-python3 -m cmake -DPython3_EXECUTABLE=$PYTHON ..
+$PYTHON -m cmake ..
 make install -j 2
