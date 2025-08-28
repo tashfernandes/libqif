@@ -35,10 +35,11 @@ jobs:
           yum install -y python3-devel
           python3 -m pip install --upgrade pip
           python3 -m pip install --upgrade scikit-build cmake pybind11 ninja python3-sphinx
+          bash .github/workflows/prepare-build-linux.sh
         CIBW_BUILD: "cp312-manylinux_x86_64"
         CIBW_BUILD_VERBOSITY: 1
         CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
-        CIBW_BEFORE_ALL_LINUX: bash .github/workflows/prepare-build-linux.sh
+        #CIBW_BEFORE_ALL_LINUX: bash .github/workflows/prepare-build-linux.sh
         #CIBW_BEFORE_ALL_MACOS: bash .github/workflows/prepare-build-macos.sh
         #CIBW_BEFORE_ALL_WINDOWS: bash .github/workflows/prepare-build-windows.sh
 
