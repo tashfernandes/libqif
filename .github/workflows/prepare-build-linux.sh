@@ -3,7 +3,7 @@
 set -x		# echo commands
 set -e		# stop on any error
 
-which python3
+PYTHON=$(which python3)
 which python
 
 cat /proc/cpuinfo
@@ -21,5 +21,6 @@ cd build
 #touch /output/html/.nojekyll														# disable jekyll processing, cause it hides folders starting with underscore!
 
 #rm -rf *
-cmake -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..						# then compile again with the default march
+#cmake -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..						# then compile again with the default march
+cmake -DPYTHON_EXECUTABLE=$PYTHON ..
 make install -j 2
