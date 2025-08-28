@@ -25,14 +25,12 @@ jobs:
     - name: Verify Python version
       run: python --version
         
-    - name: Install other things
-      run: sudo apt-get install -qy libgmp-dev libglpk-dev libgsl0-dev lsb-release
+    #- name: Install other things
+    #  run: sudo apt-get install -qy libgmp-dev libglpk-dev libgsl0-dev lsb-release
       
     - name: Build wheels
       env:
         CIBW_BEFORE_BUILD: |
-          # Ensure Python dev headers are available in the container
-          yum install -y python3-devel
           python3 -m pip install --upgrade pip
           python3 -m pip install --upgrade scikit-build cmake pybind11 ninja python3-sphinx
           bash .github/workflows/prepare-build-linux.sh
