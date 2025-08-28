@@ -4,7 +4,9 @@ set -x		# echo commands
 set -e		# stop on any error
 
 PYTHON=$(which python3)
-which python
+echo $PYTHON
+which cmake
+cmake --version
 
 cat /proc/cpuinfo
 
