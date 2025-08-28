@@ -24,5 +24,5 @@ cd build
 
 #rm -rf *
 #cmake -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..						# then compile again with the default march
-cmake -DPYTHON_EXECUTABLE=$PYTHON ..
+python3 -m cmake -DPython3_EXECUTABLE=$PYTHON ..
 make install -j 2
