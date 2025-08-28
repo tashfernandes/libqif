@@ -1,7 +1,7 @@
 name: build
 on: [push]
 
-jobs:
+jobs: 
   # Build wheels on all platforms ########################################################
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
@@ -11,6 +11,14 @@ jobs:
         os: [ubuntu-latest]
 
     steps:
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v2
+      with:
+        cmake-version: latest
+        
+    - name: Use cmake
+      run: cmake --version
+        
     - uses: actions/checkout@v4
       with:
         submodules: recursive
