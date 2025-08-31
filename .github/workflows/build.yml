@@ -36,9 +36,6 @@ jobs:
     - name: Install other things
       run: sudo apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl0-dev lsb-release
 
-    - name: Verify pybind11
-      run: python3 -m pybind11 --cmakedir
-      
     - name: Build wheels
       env:
         CIBW_BEFORE_BUILD: |
