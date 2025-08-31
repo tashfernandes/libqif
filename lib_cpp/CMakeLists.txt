@@ -5,6 +5,8 @@ project(libqif)
 
 # create qif_cpp target that either builds shared lib, or uses the system one
 #
+message(STATUS "Is build qif STILL set? ${BUILD_QIF}")
+
 if("${BUILD_QIF}")
     find_package(GSL REQUIRED)
 
