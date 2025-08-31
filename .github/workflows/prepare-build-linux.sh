@@ -7,22 +7,15 @@ PYTHON=$(which python3)
 echo $PYTHON
 cmake --version
 
+PYTHON_INCLUDE_DIR=$($PYTHON -c "from sysconfig import get_paths; print(get_paths()['include'])")
+PYTHON_LIBRARY=$(find $(dirname $PYTHON)/../lib -name "libpython3.12*.so" | head -n 1)
+echo $PYTHON_INCLUDE_DIR
+echo $PYTHON_LIBRARY
+
 cat /proc/cpuinfo
 
-# build qif
-# DPYTHON_EXECUTABLE is needed only for docs, it needs to match the version used to install Sphinx in the libqif-manylinux container (see setup.sh)
 mkdir build
 cd build
-#cmake -DMARCH=x86-64 -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..		# the gh-actions vm crashes with march=native,sandybridge or haswell, so use x86-64 just for the tests
-#make qif_cpp tests_cpp samples docs -j 2
-#./tests_cpp/run
 
-#mkdir -p /output																	# this is copied to host's 'wheelhouse' dir by cibuildwheel. At this moment it doesn't exist yet, so create
-#mv misc/docs/_build/html /output													# save in case we need to publish it
-#touch /output/html/.nojekyll														# disable jekyll processing, cause it hides folders starting with underscore!
-
-#rm -rf *
-#cmake -DPYTHON_EXECUTABLE=/opt/python/cp312-cp312/bin/python ..						# then compile again with the default march
-#cmake -DPython3_EXECUTABLE=$PYTHON ..
 cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DPython3_EXECUTABLE=$PYTHON -DPython_FIND_STRATEGY=LOCATION ..
-make install -j 2
+#make install -j 2
