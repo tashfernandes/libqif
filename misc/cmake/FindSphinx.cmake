@@ -19,7 +19,8 @@
 # (To distribute this file outside of CMake, substitute the full
 #  License text for the above reference.)
 
-find_package(Python COMPONENTS Interpreter Development REQUIRED)
+
+find_package(Python3 COMPONENTS Interpreter Development.Module REQUIRED)
 
 # Show what was found
 message(STATUS "Python interpreter: ${Python_EXECUTABLE}")
