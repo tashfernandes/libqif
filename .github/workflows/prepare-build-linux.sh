@@ -23,11 +23,12 @@ fi
 
 mkdir build
 cd build
-echo "About to run... "
-echo "cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+
+cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
       -DPython3_EXECUTABLE=$PYTHON \
       -DPython_FIND_STRATEGY=LOCATION \
       -DPython3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
+      -DPython3_ROOT_DIR=/opt/python/cp312-cp312 \
       -DPython3_FIND_DEBUG=ON \
-      $EXTRA_PY_ARGS .."
+      $EXTRA_PY_ARGS ..
 #make install -j 2
