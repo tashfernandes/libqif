@@ -17,5 +17,9 @@ cat /proc/cpuinfo
 mkdir build
 cd build
 
-cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DPython3_EXECUTABLE=$PYTHON -DPython_FIND_STRATEGY=LOCATION ..
+cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+      -DPython3_EXECUTABLE=$PYTHON \
+      -DPython_FIND_STRATEGY=LOCATION \
+      -DPython3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
+      -DPython3_LIBRARY=$PYTHON_LIBRARY ..
 #make install -j 2
