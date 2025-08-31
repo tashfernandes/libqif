@@ -13,6 +13,7 @@ echo $PYTHON_INCLUDE_DIR
 echo $PYTHON_LIBRARY
 
 export PATH=/opt/python/cp312-cp312/bin:$PATH
+export CMAKE_POLICY_VERSION_MINIMUM=3.5
 
 cat /proc/cpuinfo
 
