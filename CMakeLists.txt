@@ -12,6 +12,8 @@ if(NOT DEFINED BUILD_QIF)
 	set(BUILD_QIF true)										# build by default
 endif()
 
+message(STATUS "Build qif set? ${BUILD_QIF}")
+
 add_subdirectory(lib_cpp)									# build cpp library
 add_subdirectory(lib_python		EXCLUDE_FROM_ALL)			# build python library
 add_subdirectory(samples		EXCLUDE_FROM_ALL)			# build samples
