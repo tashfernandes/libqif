@@ -32,13 +32,9 @@ jobs:
 
     - name: Verify Python version
       run: python --version
-
-    - name: Install dev headers
-      run: |
-        yum install -y python3-devel
         
-    #- name: Install other things
-    #  run: sudo apt-get install -qy libgmp-dev libglpk-dev libgsl0-dev lsb-release
+    - name: Install other things
+      run: sudo apt-get install -qy python3-devel libgmp-dev libglpk-dev libgsl0-dev lsb-release
       
     - name: Build wheels
       env:
