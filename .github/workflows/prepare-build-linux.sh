@@ -28,6 +28,7 @@ mkdir build
 cd build
 
 cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+      -DPYBIND11_FINDPYTHON=ON \
       -DPython3_EXECUTABLE=$PYTHON \
       -DPython3_ROOT_DIR=/opt/python/cp312-cp312 \
       -DPython3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
