@@ -4,7 +4,7 @@ include_guard(GLOBAL)
 # before the project() declaration
 
 # Allow setting some options from the environment
-foreach (VAR CMAKE_TOOLCHAIN_FILE CMAKE_INSTALL_PREFIX BUILD_QIF)
+foreach (VAR CMAKE_TOOLCHAIN_FILE CMAKE_INSTALL_PREFIX)
 	if(DEFINED ENV{${VAR}})
 		set(${VAR} "$ENV{${VAR}}" CACHE PATH "" FORCE)
 	endif()
