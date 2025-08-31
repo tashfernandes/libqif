@@ -3,6 +3,11 @@ cmake_minimum_required(VERSION 3.13)
 
 project(libqif)
 
+if(NOT DEFINED BUILD_QIF)
+  set(BUILD_QIF true CACHE BOOL "Build QIF library") 
+	#set(BUILD_QIF true)										# build by default
+endif()
+
 # create qif_cpp target that either builds shared lib, or uses the system one
 #
 message(STATUS "Is build qif STILL set? ${BUILD_QIF}")
