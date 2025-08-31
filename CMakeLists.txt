@@ -9,7 +9,8 @@ include(misc/cmake/GlobalConfig.cmake)						# global cmake config
 # various targets
 #
 if(NOT DEFINED BUILD_QIF)
-	set(BUILD_QIF true)										# build by default
+  set(BUILD_QIF true CACHE BOOL "Build QIF library") 
+	#set(BUILD_QIF true)										# build by default
 endif()
 
 message(STATUS "Build qif set? ${BUILD_QIF}")
