@@ -14,6 +14,13 @@ echo $PYTHON_LIBRARY
 
 cat /proc/cpuinfo
 
+if [ -n "$PYTHON_LIBRARY" ]; then
+    EXTRA_PY_ARGS="-DPython3_LIBRARY=$PYTHON_LIBRARY"
+else
+    echo "No libpython found, continuing without it"
+    EXTRA_PY_ARGS=""
+fi
+
 mkdir build
 cd build
 
@@ -22,5 +29,5 @@ cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
       -DPython_FIND_STRATEGY=LOCATION \
       -DPython3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
       -DPython3_FIND_DEBUG=ON \
-      -DPython3_LIBRARY=$PYTHON_LIBRARY ..
+      $EXTRA_PY_ARGS ..
 #make install -j 2
