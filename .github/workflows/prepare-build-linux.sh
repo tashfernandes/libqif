@@ -12,6 +12,8 @@ PYTHON_LIBRARY=$(find $(dirname $PYTHON)/../lib -name "libpython3.12*.so" | head
 echo $PYTHON_INCLUDE_DIR
 echo $PYTHON_LIBRARY
 
+export PATH=/opt/python/cp312-cp312/bin:$PATH
+
 cat /proc/cpuinfo
 
 if [ -n "$PYTHON_LIBRARY" ]; then
@@ -26,10 +28,7 @@ cd build
 
 cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
       -DPython3_EXECUTABLE=$PYTHON \
-      -DPython_FIND_STRATEGY=LOCATION \
       -DPython3_ROOT_DIR=/opt/python/cp312-cp312 \
-      -DPython3_INCLUDE_DIRS=$PYTHON_INCLUDE_DIR \
-      -DPython3_LIBRARY=/opt/python/cp312-cp312/lib/libpython3.12.so \
-      -DPython3_FIND_DEBUG=ON \
+      -DPython3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
       $EXTRA_PY_ARGS ..
 #make install -j 2
