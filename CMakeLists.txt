@@ -1,5 +1,5 @@
 include_guard(GLOBAL)
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.5)
 enable_testing()
 
 include(misc/cmake/GlobalHead.cmake)
