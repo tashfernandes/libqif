@@ -32,6 +32,10 @@ jobs:
 
     - name: Verify Python version
       run: python --version
+
+    - name: Install dev headers
+      run: |
+        yum install -y python3-devel
         
     #- name: Install other things
     #  run: sudo apt-get install -qy libgmp-dev libglpk-dev libgsl0-dev lsb-release
