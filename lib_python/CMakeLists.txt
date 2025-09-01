@@ -12,7 +12,7 @@ add_subdirectory(../lib_cpp lib_cpp)
 set(PYBIND11_PYTHON_VERSION 3.12)	# require at least python 3.12
 set(PYBIND11_FINDPYTHON "on")	# require at least python 3.12
 #add_subdirectory(../external/pybind11 pybind11)
-find_package(pybind11 REQUIRED)
+find_package(pybind11 CONFIG REQUIRED)
 
 # build the python module inside the "qif" dir, unless CMAKE_LIBRARY_OUTPUT_DIRECTORY is set (see setup.py)
 if (NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
