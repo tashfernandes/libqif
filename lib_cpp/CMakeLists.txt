@@ -32,7 +32,7 @@ if("${BUILD_QIF}")
 	add_library(qif_cpp ${LIB_SOURCES})								# libqif_cpp, depends on all src/*.cpp files. SHARED/STATIC is decided based on BUILD_SHARED_LIBS (see GlobalConfig.cmake)
 	set_target_properties(qif_cpp PROPERTIES OUTPUT_NAME "qif")		# the target is named "qif_cpp", the library is named just "qif"
 
-	target_include_directories(qif_cpp PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/include" "${CMAKE_CURRENT_BINARY_DIR}/external/osqp/include/public" include)
+  target_include_directories(qif_cpp PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/include" "${CMAKE_CURRENT_BINARY_DIR}/osqp/include/public/" include)
 
 else()
 	# using existing qif
