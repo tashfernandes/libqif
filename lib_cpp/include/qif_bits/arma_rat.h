@@ -37,10 +37,10 @@ struct is_real<rat> : std::true_type {};
 
 // for abs
 //
-template<>
-arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
-	return mppp::abs(x);
-}
+//template<>
+//arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
+//	return mppp::abs(x);
+//}
 
 // ------------------------------------------------
 
