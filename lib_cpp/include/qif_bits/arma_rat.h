@@ -10,6 +10,11 @@ struct arma_fp16_real_only<rat> {
 };
 
 template<>
+struct arma_real_only<rat> {
+    typedef rat result;
+};
+
+template<>
 struct is_blas_type<rat> : std::false_type {};
 
 template<>
@@ -30,17 +35,17 @@ struct is_real<rat> : std::true_type {};
 //	return op_dot::direct_dot_generic<rat>(n_elem, A, B);
 //}
 //
-//template<>
-//arma_hot inline rat op_dot::direct_dot<rat>(const uword n_elem, const rat* const A, const rat* const B) {
-//	return op_dot::direct_dot_generic<rat>(n_elem, A, B);
-//}
+template<>
+arma_hot inline rat op_dot::direct_dot<rat>(const uword n_elem, const rat* const A, const rat* const B) {
+	return op_dot::direct_dot_generic<rat>(n_elem, A, B);
+}
 
 // for abs
 //
-//template<>
-//arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
-//	return mppp::abs(x);
-//}
+template<>
+arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
+	return mppp::abs(x);
+}
 
 // ------------------------------------------------
 
