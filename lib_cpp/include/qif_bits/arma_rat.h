@@ -3,11 +3,16 @@ namespace arma {
 
 using qif::rat;
 
+#define ARMA_DONT_USE_BLAS
+
 // register rational<1> as a real type.
 template<>
 struct arma_fp16_real_only<rat> {
 	typedef rat result;
 };
+
+template<>
+struct is_blas_type<rat> : std::false_type {};
 
 // use direct_dot_arma (generic dot product implementation) for direct_dot<rat>
 //
