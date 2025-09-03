@@ -5,9 +5,23 @@ using qif::rat;
 
 // register rational<1> as a real type.
 template<>
-struct arma_real_only<rat> {
-	typedef rat result;
+struct arma_fp16_real_only<rat> {
+    typedef rat result;
 };
+
+template<>
+struct is_blas_type<rat> : std::false_type {};
+
+template<>
+struct arma_not_cx<rat> {
+    typedef void result;
+};
+
+template<>
+struct arma_cx_only<rat> {}; 
+
+template<>
+struct is_real<rat> : std::true_type {};
 
 // use direct_dot_arma (generic dot product implementation) for direct_dot<rat>
 //
