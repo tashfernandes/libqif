@@ -48,6 +48,11 @@ endif()
 # PRIVATE, only needed for qif_cpp itself
 if("${BUILD_QIF}")
   message(STATUS "Finding linked libraries..")
+  if("${GSL_FOUND}")
+    message(STATUS "FOUND GSL!!!")
+  else()
+    message(STATUS, "NOT FOUND GSL!!")
+  endif()
 	target_link_libraries(qif_cpp PRIVATE osqpstatic GSL::gsl armadillo mp++)	# armadillo/mp++ are not really needed, we only list then to get their include_directories
 
 	if(${QIF_USE_ORTOOLS})
