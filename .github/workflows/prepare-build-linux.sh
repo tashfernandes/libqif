@@ -3,7 +3,7 @@
 set -x		# echo commands
 set -e		# stop on any error
 
-PYTHON=$(which python3)
+PYTHON=$(which python3.12)
 echo $PYTHON
 cmake --version
 
