@@ -5,7 +5,7 @@ using qif::rat;
 
 // register rational<1> as a real type.
 template<>
-struct arma_real_only<rat> {
+struct arma_fp16_real_only<rat> {
 	typedef rat result;
 };
 
