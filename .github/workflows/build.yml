@@ -44,7 +44,8 @@ jobs:
           bash .github/workflows/prepare-build-linux.sh
         CIBW_BUILD: "cp312-manylinux_x86_64"
         CIBW_BUILD_VERBOSITY: 1
-        CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
+        #CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
+        CIBW_MANYLINUX_X86_64_IMAGE: ubuntu:latest
         #CIBW_BEFORE_ALL_LINUX: bash .github/workflows/prepare-build-linux.sh
         #CIBW_BEFORE_ALL_MACOS: bash .github/workflows/prepare-build-macos.sh
         #CIBW_BEFORE_ALL_WINDOWS: bash .github/workflows/prepare-build-windows.sh
