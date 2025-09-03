@@ -51,15 +51,8 @@ arma_hot inline rat op_dot::direct_dot<rat>(const uword n_elem, const rat* const
 //#}
 
 template<>
-arma_inline rat eop_aux::sqrt(const rat x) {
-    // Convert rational -> real
-    mppp::real rx(x);
-
-    // Call the member function sqrt() on real
-    mppp::real ry = rx.sqrt();
-
-    // Convert back to rat (via double)
-    return rat(ry.convert_to<double>());
+arma_inline rat eop_aux::sqrt<rat>(const rat x) {
+  return mppp::sqrt(x);
 }
 
 // for abs
