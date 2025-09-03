@@ -13,7 +13,7 @@ struct arma_real_only<rat> {
 //
 template<>
 arma_hot inline rat op_dot::direct_dot_generic<rat>(const uword n_elem, const rat* const A, const rat* const B) {
-	return op_dot::direct_dot_arma<rat>(n_elem, A, B);
+	return op_dot::direct_dot_generic<rat>(n_elem, A, B);
 }
 
 // for abs
