@@ -42,6 +42,7 @@ jobs:
     - name: Build wheels
       env:
         CIBW_BEFORE_BUILD: |
+          sudo apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
           python3 -m pip install --upgrade pip
           python3 -m pip install --upgrade scikit-build cmake pybind11[global] ninja
           bash .github/workflows/prepare-build-linux.sh
