@@ -45,16 +45,6 @@ arma_hot inline rat op_dot::direct_dot<rat>(const uword n_elem, const rat* const
 	return op_dot::direct_dot_generic<rat>(n_elem, A, B);
 }
 
-//template<>
-//#arma_inline rat eop_aux::sqrt(const rat x) {
-//#  return mppp::sqrt(x);
-//#}
-
-template<>
-arma_inline rat eop_aux::sqrt<rat>(const rat x) {
-  return mppp::sqrt(x);
-}
-
 // for abs
 //
 template<>
