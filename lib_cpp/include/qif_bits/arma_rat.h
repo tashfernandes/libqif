@@ -53,7 +53,7 @@ arma_inline rat eop_aux::sqrt(const rat x) {
 // for abs
 //
 template<>
-arma_inline rat eop_aux::arma_abs(const rat x) {
+arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
 	return mppp::abs(x);
 }
 
