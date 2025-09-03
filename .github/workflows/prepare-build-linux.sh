@@ -8,7 +8,9 @@ echo $PYTHON
 cmake --version
 
 echo "-----TEST -------"
+apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
 gsl-config --version
+gsl-config --prefix
 
 dpkg -L libgsl-dev
 
