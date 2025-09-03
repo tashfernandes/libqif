@@ -33,8 +33,8 @@ jobs:
     - name: Verify Python version
       run: python --version
         
-    - name: Install other things
-      run: sudo apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
+   # - name: Install other things
+   #   run: sudo apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
 
     - name: Verify GSL
       run: |
@@ -44,14 +44,15 @@ jobs:
     - name: Build wheels
       env:
         CIBW_BEFORE_BUILD: |
-          python3 -m pip install --upgrade pip
-          python3 -m pip install --upgrade scikit-build cmake pybind11[global] ninja
+          dnf install -y python3.12 python3.12-pybind11-devel python3.12-devel gmp-devel glpk-devel gsl-devel redhat-lsb-core
+          python3.12 -m pip install --upgrade pip
+          python3.12 -m pip install --upgrade scikit-build cmake pybind11[global] ninja
           bash .github/workflows/prepare-build-linux.sh
         CIBW_BUILD: "cp312-manylinux_x86_64"
         CIBW_BUILD_VERBOSITY: 1
         #CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
         #CIBW_MANYLINUX_X86_64_IMAGE: ubuntu:latest
-        CIBW_BEFORE_ALL_LINUX: dnf install -y python3-pybind11-devel python3-devel gmp-devel glpk-devel gsl-devel redhat-lsb-core
+        CIBW_BEFORE_ALL_LINUX: python3 --version
         #CIBW_BEFORE_ALL_MACOS: bash .github/workflows/prepare-build-macos.sh
         #CIBW_BEFORE_ALL_WINDOWS: bash .github/workflows/prepare-build-windows.sh
 
