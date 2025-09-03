@@ -37,12 +37,13 @@ jobs:
       run: sudo apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
 
     - name: Verify GSL
-      run: gsl-config --version
+      run: |
+        gsl-config --version
+        gsl-config --prefix
       
     - name: Build wheels
       env:
         CIBW_BEFORE_BUILD: |
-          sudo apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
           python3 -m pip install --upgrade pip
           python3 -m pip install --upgrade scikit-build cmake pybind11[global] ninja
           bash .github/workflows/prepare-build-linux.sh
@@ -50,7 +51,7 @@ jobs:
         CIBW_BUILD_VERBOSITY: 1
         #CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
         #CIBW_MANYLINUX_X86_64_IMAGE: ubuntu:latest
-        #CIBW_BEFORE_ALL_LINUX: bash .github/workflows/prepare-build-linux.sh
+        CIBW_BEFORE_ALL_LINUX: apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
         #CIBW_BEFORE_ALL_MACOS: bash .github/workflows/prepare-build-macos.sh
         #CIBW_BEFORE_ALL_WINDOWS: bash .github/workflows/prepare-build-windows.sh
 
