@@ -7,13 +7,6 @@ PYTHON=$(which python3)
 echo $PYTHON
 cmake --version
 
-echo "-----TEST -------"
-apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
-gsl-config --version
-gsl-config --prefix
-
-dpkg -L libgsl-dev
-
 PYTHON_INCLUDE_DIR=$($PYTHON -c "from sysconfig import get_paths; print(get_paths()['include'])")
 PYTHON_LIBRARY=$(find $(dirname $PYTHON)/../lib -name "libpython3.12*.so" | head -n 1)
 echo $PYTHON_INCLUDE_DIR
@@ -34,9 +27,9 @@ fi
 mkdir build
 cd build
 
-cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-      -DPYBIND11_FINDPYTHON=ON \
-      -DPython3_EXECUTABLE=$PYTHON \
-      -DPython3_ROOT_DIR=/opt/python/cp312-cp312 \
-      -DPython3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
-      $EXTRA_PY_ARGS ..
+#cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+#      -DPYBIND11_FINDPYTHON=ON \
+#      -DPython3_EXECUTABLE=$PYTHON \
+#      -DPython3_ROOT_DIR=/opt/python/cp312-cp312 \
+#      -DPython3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
+#      $EXTRA_PY_ARGS ..
