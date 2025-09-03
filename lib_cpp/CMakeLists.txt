@@ -1,5 +1,5 @@
 include_guard(GLOBAL)
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 project(libqif)
 
@@ -13,7 +13,8 @@ endif()
 message(STATUS "Is build qif STILL set? ${BUILD_QIF}")
 
 if("${BUILD_QIF}")
-    find_package(GSL REQUIRED)
+  message(STATUS "Trying to find GSL")
+  find_package(GSL REQUIRED)
 
 	# build armadillo in dir 'armadillo'
 	set(CMAKE_UNITY_BUILD OFF)								# never use unity for armadillo, it breaks
@@ -46,6 +47,7 @@ endif()
 #
 # PRIVATE, only needed for qif_cpp itself
 if("${BUILD_QIF}")
+  message(STATUS "Finding linked libraries..")
 	target_link_libraries(qif_cpp PRIVATE osqpstatic GSL::gsl armadillo mp++)	# armadillo/mp++ are not really needed, we only list then to get their include_directories
 
 	if(${QIF_USE_ORTOOLS})
