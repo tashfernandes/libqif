@@ -7,6 +7,11 @@ PYTHON=$(which python3)
 echo $PYTHON
 cmake --version
 
+echo "-----TEST -------"
+gsl-config --version
+
+dpkg -L libgsl-dev
+
 PYTHON_INCLUDE_DIR=$($PYTHON -c "from sysconfig import get_paths; print(get_paths()['include'])")
 PYTHON_LIBRARY=$(find $(dirname $PYTHON)/../lib -name "libpython3.12*.so" | head -n 1)
 echo $PYTHON_INCLUDE_DIR
