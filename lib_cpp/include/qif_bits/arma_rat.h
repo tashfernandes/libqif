@@ -19,7 +19,7 @@ struct is_blas_type<rat> : std::false_type {};
 
 template<>
 struct arma_not_cx<rat> {
-    typedef void result;
+    typedef rat result;
 };
 
 template<>
