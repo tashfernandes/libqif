@@ -18,10 +18,10 @@ struct arma_blas_real_only<rat> {
 
 // for abs
 //
-template<>
-arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
-	return mppp::abs(x);
-}
+//template<>
+//arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
+//	return mppp::abs(x);
+//}
 
 // ------------------------------------------------
 
