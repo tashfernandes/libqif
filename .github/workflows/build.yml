@@ -51,7 +51,7 @@ jobs:
         CIBW_BUILD_VERBOSITY: 1
         #CIBW_MANYLINUX_X86_64_IMAGE: ghcr.io/chatziko/libqif/manylinux:v9
         #CIBW_MANYLINUX_X86_64_IMAGE: ubuntu:latest
-        CIBW_BEFORE_ALL_LINUX: dnf install -y pybind11-devel python3-devel gmp-devel glpk-devel gsl-devel lsb-release
+        CIBW_BEFORE_ALL_LINUX: dnf install -y pybind11-devel python3-devel gmp-devel glpk-devel gsl-devel redhat-lsb-core
         #CIBW_BEFORE_ALL_MACOS: bash .github/workflows/prepare-build-macos.sh
         #CIBW_BEFORE_ALL_WINDOWS: bash .github/workflows/prepare-build-windows.sh
 
