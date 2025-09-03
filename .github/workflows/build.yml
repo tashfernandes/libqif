@@ -36,10 +36,10 @@ jobs:
    # - name: Install other things
    #   run: sudo apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
 
-    - name: Verify GSL
-      run: |
-        gsl-config --version
-        gsl-config --prefix
+   # - name: Verify GSL
+   #   run: |
+   #     gsl-config --version
+   #     gsl-config --prefix
       
     - name: Build wheels
       env:
