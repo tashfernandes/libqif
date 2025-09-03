@@ -36,6 +36,9 @@ jobs:
     - name: Install other things
       run: sudo apt-get install -qy pybind11-dev python3-dev libgmp-dev libglpk-dev libgsl-dev lsb-release
 
+    - name: Verify GSL
+      run: gsl-config --version
+      
     - name: Build wheels
       env:
         CIBW_BEFORE_BUILD: |
