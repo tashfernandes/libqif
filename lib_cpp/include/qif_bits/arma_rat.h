@@ -23,9 +23,8 @@ struct arma_not_cx<rat> {
 };
 
 template<>
-struct arma_real_or_cx_only<rat> {
-    typedef rat result;
-};
+struct arma_real_or_cx_only<rat> {};
+
 
 template<>
 struct arma_cx_only<rat> {}; 
