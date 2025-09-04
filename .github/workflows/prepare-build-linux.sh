@@ -18,7 +18,7 @@ export CMAKE_POLICY_VERSION_MINIMUM=3.5
 cat /proc/cpuinfo
 
 if [ -n "$PYTHON_LIBRARY" ]; then
-    EXTRA_PY_ARGS="-DPython3_LIBRARY=$PYTHON_LIBRARY"
+    EXTRA_PY_ARGS="-DPYTHON_LIBRARY=$PYTHON_LIBRARY"
 else
     echo "No libpython found, continuing without it"
     EXTRA_PY_ARGS=""
@@ -29,8 +29,8 @@ cd build
 
 cmake -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
       -DPYBIND11_FINDPYTHON=ON \
-      -DPython3_EXECUTABLE=$PYTHON \
-      -DPython3_ROOT_DIR=/opt/python/cp312-cp312 \
-      -DPython3_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
+      -DPYTHON_EXECUTABLE=$PYTHON \
+      -DPYTHON_ROOT_DIR=/opt/python/cp312-cp312 \
+      -DPYTHON_INCLUDE_DIR=$PYTHON_INCLUDE_DIR \
       $EXTRA_PY_ARGS ..
 make install -j 2
