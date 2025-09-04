@@ -34,16 +34,16 @@ struct arma_cx_only<rat> {};
 template<>
 struct is_real<rat> : std::true_type {};
 
-template<> arma_inline static arma_real_or_cx_only<rat>::result sqrt  (const rat x) { return rat( std::sqrt (double(x)) ); }
-template<> arma_inline static arma_real_or_cx_only<rat>::result log10 (const rat x) { return rat( std::log10(double(x)) ); }
-template<> arma_inline static arma_real_or_cx_only<rat>::result log   (const rat x) { return rat( std::log  (double(x)) ); }
-template<> arma_inline static arma_real_or_cx_only<rat>::result exp   (const rat x) { return rat( std::exp  (double(x)) ); }
-template<> arma_inline static arma_real_or_cx_only<rat>::result cos   (const rat x) { return rat( std::cos  (double(x)) ); }
-template<> arma_inline static arma_real_or_cx_only<rat>::result sin   (const rat x) { return rat( std::sin  (double(x)) ); }
-template<> arma_inline static arma_real_or_cx_only<rat>::result tan   (const rat x) { return rat( std::tan  (double(x)) ); }
-template<> arma_inline static arma_real_or_cx_only<rat>::result cosh  (const rat x) { return rat( std::cosh (double(x)) ); }  
-template<> arma_inline static arma_real_or_cx_only<rat>::result sinh  (const rat x) { return rat( std::sinh (double(x)) ); }  
-template<> arma_inline static arma_real_or_cx_only<rat>::result tanh  (const rat x) { return rat( std::tanh (double(x)) ); }
+template<> arma_inline rat eop_aux::sqrt<rat>(const rat x) { return rat( std::sqrt (double(x)) ); }
+template<> arma_inline rat eop_aux::log10<rat>(const rat x) { return rat( std::log10(double(x)) ); }
+template<> arma_inline rat eop_aux::log<rat>(const rat x) { return rat( std::log  (double(x)) ); }
+template<> arma_inline rat eop_aux::exp<rat>(const rat x) { return rat( std::exp  (double(x)) ); }
+template<> arma_inline rat eop_aux::cos<rat>(const rat x) { return rat( std::cos  (double(x)) ); }
+template<> arma_inline rat eop_aux::sin<rat>(const rat x) { return rat( std::sin  (double(x)) ); }
+template<> arma_inline rat eop_aux::tan<rat>(const rat x) { return rat( std::tan  (double(x)) ); }
+template<> arma_inline rat eop_aux::cosh<rat>(const rat x) { return rat( std::cosh (double(x)) ); }  
+template<> arma_inline rat eop_aux::sinh<rat>(const rat x) { return rat( std::sinh (double(x)) ); }  
+template<> arma_inline rat eop_aux::tanh<rat>(const rat x) { return rat( std::tanh (double(x)) ); }
 
 // use direct_dot_arma (generic dot product implementation) for direct_dot<rat>
 //
@@ -64,10 +64,8 @@ arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
 	return mppp::abs(x);
 }
 
-template<>
-arma_inline rat eop_aux::arma_abs<rat>(const rat x) {
-	return mppp::abs(x);
-}
+//template<typename eT> arma_inline static typename              arma_real_only<eT>::result arma_abs (const eT               x) { return std::abs(x); }
+
 // ------------------------------------------------
 
 // register as supported
